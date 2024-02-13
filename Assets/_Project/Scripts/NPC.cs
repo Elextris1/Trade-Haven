@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour, IInteractable
 {
-    public void Interact()
+    public bool isInteracting { get; set; }
+
+    public void StartInteracting()
     {
-        Debug.Log("Iteracing with " + this);
-        DialogManager.instance.StartDialog("NPC", "This is a Test sentence");
+        if (TryGetComponent<Dialog>(out var dialog))
+        {
+            if (dialog.hasDialog)
+            {
+                dialog.StartDialog();
+            }
+        }
+    }
+
+    public void StopInteracting()
+    {
+        DialogManager.instance.EndDialog();
     }
 }
