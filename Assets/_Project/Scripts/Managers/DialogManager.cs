@@ -20,7 +20,16 @@ public class DialogManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        #region Singleton
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+        #endregion
     }
 
     private void MouseClicked(InputAction.CallbackContext context)

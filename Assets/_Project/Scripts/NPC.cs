@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour, IInteractable
 {
-    public bool isInteracting { get; set; }
+    public Transform interactor { get; set; }
 
-    public void StartInteracting()
+    public virtual void StartInteracting()
     {
         if (TryGetComponent<Dialog>(out var dialog))
         {

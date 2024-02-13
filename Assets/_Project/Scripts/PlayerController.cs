@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Nothing to interact with");
             return;
         }
-        interactableObject.TryInteracting();
+        interactableObject.TryInteracting(transform);
     }
 
 

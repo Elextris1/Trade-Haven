@@ -1,25 +1,24 @@
-//I like to keep all my Interfaces in one script
-
-
+using UnityEngine;
 using UnityEngine.InputSystem;
 
+// I like to keep all my Interfaces in one script
 public interface IInteractable
 {
-    public bool isInteracting { get; set; }
+    public Transform interactor { get; set; }
 
 
-    public void TryInteracting()
+    public void TryInteracting(Transform newInteractor)
     {
-        if (!isInteracting)
+        if (interactor == null)
         {
-            isInteracting = true;
+            interactor = newInteractor;
             StartInteracting();
             InputManager.input.UI.Cancel.performed += CancelPressed;
         }
         else
         {
             StopInteracting();
-            isInteracting = false;
+            interactor = null;
             InputManager.input.UI.Cancel.performed -= CancelPressed;
         }
     }
