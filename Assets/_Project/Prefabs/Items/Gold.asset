@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3174d7bbd3d794b881e03f8930b283, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: -977867692, guid: 74327fbf82af9d642be3e4b8a7f5e357, type: 3}
   isStackable: 1
   price: 0
