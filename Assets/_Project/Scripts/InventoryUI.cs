@@ -80,5 +80,10 @@ public class InventoryUI : MonoBehaviour
             textBox.enabled = true;
             textBox.text = newItem.amountStored.ToString();
         }
+
+        if (newItem.info.prefab.TryGetComponent<IUsable>(out var usableItem))
+        {
+            newButton.GetComponent<Button>().onClick.AddListener(() => usableItem.Use(playerInventory.transform));
+        }
     }
 }

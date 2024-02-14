@@ -46,7 +46,7 @@ public class Shop : MonoBehaviour, IInteractable
         {
             if (!interactorInventory.TryAddItem(item, 1))
             {
-                var newItem = Instantiate(item.prefab, transform.position, Quaternion.identity).GetComponent<Item>();
+                var newItem = Instantiate(item.prefab, transform.position, Quaternion.identity).GetComponent<ItemPickup>();
                 newItem.amount = 1;
             }
         }
@@ -70,7 +70,7 @@ public class Shop : MonoBehaviour, IInteractable
         {
             if (!interactorInventory.TryAddItem(gold, adjustedPrice))
             {
-                var newItem = Instantiate(gold.prefab, transform.position, Quaternion.identity).GetComponent<Item>();
+                var newItem = Instantiate(gold.prefab, transform.position, Quaternion.identity).GetComponent<ItemPickup>();
                 newItem.amount = adjustedPrice;
             }
         }

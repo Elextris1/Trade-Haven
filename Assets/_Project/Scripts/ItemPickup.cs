@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class ItemPickup : MonoBehaviour
 {
     [SerializeField] private SO_ItemInfo itemInfo;
     [SerializeField] public int amount = 1;

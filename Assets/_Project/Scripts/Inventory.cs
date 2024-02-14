@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-
     [SerializeField] private List<Item> itemsInInventory = new List<Item>();
     [SerializeField] private int maxSpace;
     public bool HasSpace => itemsInInventory.Count < maxSpace;

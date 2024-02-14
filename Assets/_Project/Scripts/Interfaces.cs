@@ -30,3 +30,8 @@ public interface IInteractable
     public void StartInteracting();
     public void StopInteracting();
 }
+
+public interface IUsable
+{
+    public void Use(Transform user);
+}
