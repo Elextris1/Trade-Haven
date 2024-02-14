@@ -19,6 +19,6 @@ public class NPC : MonoBehaviour, IInteractable
 
     public void StopInteracting()
     {
-        DialogManager.instance.EndDialog();
+        DialogManager.instance.EndDialog(); 
     }
 }
