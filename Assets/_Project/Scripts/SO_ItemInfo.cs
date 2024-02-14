@@ -9,4 +9,7 @@ public class SO_ItemInfo : ScriptableObject
 
     [Header("---Value---")]
     public int price;
+
+    [Header("---Item Prefab---")]
+    public Transform prefab;
 }

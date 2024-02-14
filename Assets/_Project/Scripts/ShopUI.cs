@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
     public static ShopUI instance;
     [SerializeField] private GameObject shopPanel;
-    [SerializeField] private Transform itemContainer;
+    [SerializeField] private Transform sellingItemContainer;
+    [SerializeField] private Transform buyingItemContainer;
     [SerializeField] private Transform buttonPrefab;
 
     private Shop thisShop;
 
-    [SerializeField] private List<SO_ItemInfo> stock = new List<SO_ItemInfo>();
     private void Awake()
     {
         #region Singleton
@@ -41,24 +42,48 @@ public class ShopUI : MonoBehaviour
 
     private void LoadShop()
     {
-        for (int i = itemContainer.childCount - 1; i >= 0; i--)
+        ClearContainer(sellingItemContainer);
+        ClearContainer(buyingItemContainer);
+
+        foreach (var item in thisShop.sellingItemsList)
         {
-            Destroy(itemContainer.GetChild(i).gameObject);
+            CreateButton(item, sellingItemContainer, true);
         }
-        foreach (var item in stock)
+        foreach (var item in thisShop.buyingItemsList)
         {
-            CreateItemButton(item);
+            CreateButton(item, buyingItemContainer, false);
         }
     }
 
-    private void CreateItemButton(SO_ItemInfo newItem)
+    private void ClearContainer(Transform container)
+    {
+        for (int i = container.childCount -1;  i >= 0; i--)
+        {
+            Destroy(container.GetChild(i).gameObject);
+        }
+    }
+
+    private void CreateButton(SO_ItemInfo item, Transform itemContainer, bool isBuyingButton)
     {
         var newButton = Instantiate(buttonPrefab, itemContainer);
-        newButton.name = newItem.name + "_Button";
+        newButton.name = item.name + (isBuyingButton ? " Buy_Button" : " Sell_Button");
 
         //Terrible, but it gets the job done in this case.
-        newButton.GetComponentsInChildren<Image>()[1].sprite = newItem.icon;
-        newButton.GetComponentInChildren<TextMeshProUGUI>().text = newItem.price.ToString();
-        newButton.GetComponent<Button>().onClick.AddListener(() => thisShop.Buy(newItem));
+        newButton.GetComponentsInChildren<Image>()[1].sprite = item.icon;
+
+        var textBox = newButton.GetComponentInChildren<TextMeshProUGUI>();
+        textBox.gameObject.SetActive(true);
+
+        var adjustedPrice = isBuyingButton ? (int)(item.price + item.price * thisShop.Markup) : (int)(item.price - item.price * thisShop.Markup);
+        textBox.text = adjustedPrice.ToString();
+
+        if (isBuyingButton)
+        {
+            newButton.GetComponent<Button>().onClick.AddListener(() => thisShop.Buy(item));
+        }
+        else
+        {
+            newButton.GetComponent<Button>().onClick.AddListener(() => thisShop.Sell(item));
+        }
     }
 }

@@ -6,7 +6,6 @@ public interface IInteractable
 {
     public Transform interactor { get; set; }
 
-
     public void TryInteracting(Transform newInteractor)
     {
         if (interactor == null)

@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 3561824898521829033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: d303ebdc534e8cd49923a6593182b877, type: 2}
-  Amount: 1
+  amount: 1
 --- !u!61 &593221732178036888
 BoxCollider2D:
   m_ObjectHideFlags: 0

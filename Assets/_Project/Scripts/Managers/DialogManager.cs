@@ -116,6 +116,7 @@ public class DialogManager : MonoBehaviour
     {
         InputManager.input.Player.Move.Enable();
         InputManager.input.Player.Fire.Enable();
+        InputManager.input.Player.Inventory.Enable();
         InputManager.input.UI.Click.performed -= MouseClicked;
         InputManager.input.UI.Disable();
     }
@@ -123,6 +124,7 @@ public class DialogManager : MonoBehaviour
     {
         InputManager.input.Player.Move.Disable();
         InputManager.input.Player.Fire.Disable();
+        InputManager.input.Player.Inventory.Disable();
         InputManager.input.UI.Enable();
         InputManager.input.UI.Click.performed += MouseClicked;
     }

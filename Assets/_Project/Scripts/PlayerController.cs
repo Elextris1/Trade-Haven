@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviour
         if (other.TryGetComponent(out interactableObject))
         {
             interactableObject = null;
-            Debug.Log("Left interactable area");
         }
     }
 }

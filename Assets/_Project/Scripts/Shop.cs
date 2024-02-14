@@ -6,6 +6,14 @@ using UnityEngine;
 public class Shop : MonoBehaviour, IInteractable
 {
     [SerializeField] private SO_ItemInfo gold;
+    [SerializeField] private float markup;
+    public float Markup
+    {
+        get { return markup / 100; }
+    }
+
+    [field: SerializeField] public List<SO_ItemInfo> sellingItemsList { get; private set; }
+    [field: SerializeField] public List<SO_ItemInfo> buyingItemsList { get; private set; }
 
     public Transform interactor { get; set; }
 
@@ -33,21 +41,18 @@ public class Shop : MonoBehaviour, IInteractable
             return;
         }
 
-        if (interactorInventory.HasSpace)
+        var adjustedPrice = (int)(item.price + item.price * Markup);
+        if (interactorInventory.RequestItem(gold, adjustedPrice))
         {
-            if (interactorInventory.RequestItem(gold, item.price))
+            if (!interactorInventory.TryAddItem(item, 1))
             {
-                interactorInventory.TryAddItem(item, 1);
-            }
-            else
-            {
-                Debug.Log("Not enough items in " + interactorInventory);
-                return;
+                var newItem = Instantiate(item.prefab, transform.position, Quaternion.identity).GetComponent<Item>();
+                newItem.amount = 1;
             }
         }
         else
         {
-            Debug.Log("Not enough space in " + interactorInventory);
+            Debug.Log("Not enough gold in " + interactorInventory);
             return;
         }
     }
@@ -60,14 +65,14 @@ public class Shop : MonoBehaviour, IInteractable
             return;
         }
 
-        if (interactorInventory.TryAddItem(gold, item.price))
+        var adjustedPrice = (int)(item.price - item.price * Markup);
+        if (interactorInventory.RequestItem(item, 1))
         {
-            interactorInventory.RequestItem(item, 1);
+            if (!interactorInventory.TryAddItem(gold, adjustedPrice))
+            {
+                var newItem = Instantiate(gold.prefab, transform.position, Quaternion.identity).GetComponent<Item>();
+                newItem.amount = adjustedPrice;
+            }
         }
-        else
-        {
-            Debug.Log("Not enough space for gold");
-        }
-
     }
 }

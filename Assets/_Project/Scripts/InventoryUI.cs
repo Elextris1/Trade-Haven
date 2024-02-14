@@ -62,17 +62,23 @@ public class InventoryUI : MonoBehaviour
 
         foreach (var item in itemsInInventory)
         {
-            CreateItemButton(item);
+            CreateItemSlot(item);
         }
     }
 
-    private void CreateItemButton(Inventory.Item newItem)
+    private void CreateItemSlot(Inventory.Item newItem)
     {
         var newButton = Instantiate(buttonPrefab, itemContainer);
         newButton.name = newItem.info.name + "_Button";
 
         //Terrible, but it gets the job done in this case.
         newButton.GetComponentsInChildren<Image>()[1].sprite = newItem.info.icon;
-        newButton.GetComponentInChildren<TextMeshProUGUI>().text = newItem.amountStored.ToString();
+
+        if (newItem.amountStored > 1)
+        {
+            var textBox = newButton.GetComponentInChildren<TextMeshProUGUI>();
+            textBox.enabled = true;
+            textBox.text = newItem.amountStored.ToString();
+        }
     }
 }

@@ -15,3 +15,4 @@ MonoBehaviour:
   icon: {fileID: -977867692, guid: 74327fbf82af9d642be3e4b8a7f5e357, type: 3}
   isStackable: 1
   price: 0
+  prefab: {fileID: 6029007842156432086, guid: 4d52ca4a14b05024fb8b093a114a134d, type: 3}
