@@ -5,11 +5,11 @@ using UnityEngine.U2D.Animation;
 
 public class Armor : Equipment
 {
-    [SerializeField] private SpriteLibraryAsset armorSprites;
+    [SerializeField] private Transform armorPrefab;
 
     public override void Use(Transform user)
     {
         var playerVisual = user.GetComponentInChildren<AnimationController>();
-        playerVisual.ChangeSprites(armorSprites);
+        playerVisual.ChangeSprites(armorPrefab);
     }
 }

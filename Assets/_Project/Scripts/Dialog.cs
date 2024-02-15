@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Dialog : MonoBehaviour
 {
+
+    [SerializeField] string speakerName;
     [SerializeField] private List<string> sentences = new List<string>();
     public bool hasDialog
     {
@@ -24,7 +26,7 @@ public class Dialog : MonoBehaviour
     {
         if (hasDialog)
         {
-            DialogManager.instance.StartDialog(name, sentences);
+            DialogManager.instance.StartDialog(speakerName, sentences);
         }
     }
 }

@@ -11,6 +11,7 @@ public class Shop : MonoBehaviour, IInteractable
     {
         get { return markup / 100; }
     }
+    public bool isOpen = true;
 
     [field: SerializeField] public List<SO_ItemInfo> sellingItemsList { get; private set; }
     [field: SerializeField] public List<SO_ItemInfo> buyingItemsList { get; private set; }
@@ -19,6 +20,11 @@ public class Shop : MonoBehaviour, IInteractable
 
     public void StartInteracting()
     {
+        if (!isOpen)
+        {
+            interactor = null;
+            return;
+        }
         InputManager.input.Player.Move.Disable();
         InputManager.input.Player.Fire.Disable();
         InputManager.input.UI.Enable();

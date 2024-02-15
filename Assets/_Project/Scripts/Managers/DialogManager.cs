@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,6 +19,8 @@ public class DialogManager : MonoBehaviour
     private string currentSentence;
     private List<string> loadedSentences;
 
+    public event Action OnDialogEnd;
+
     private void Awake()
     {
         #region Singleton
@@ -34,7 +37,6 @@ public class DialogManager : MonoBehaviour
 
     private void MouseClicked(InputAction.CallbackContext context)
     {
-        Debug.Log(context);
         if (isSentenceFinished)
         {
             CheckForNextSentence();
@@ -63,6 +65,7 @@ public class DialogManager : MonoBehaviour
         EnablePlayerInput();
         dialogPanel.SetActive(false);
         loadedSentences.Clear();
+        OnDialogEnd?.Invoke();
     }
 
 

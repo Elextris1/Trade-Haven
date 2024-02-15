@@ -7,16 +7,15 @@ using UnityEngine.U2D.Animation;
 public class AnimationController : MonoBehaviour
 {
     private Animator animator;
-    private SpriteLibrary spriteLibrary;
 
     private void Start()
     {
         TryGetComponent(out animator);
-        TryGetComponent(out spriteLibrary);
     }
     private void Update()
     {
         PlayAnimation();
+        
     }
 
     private void PlayAnimation()
@@ -26,8 +25,11 @@ public class AnimationController : MonoBehaviour
         animator.SetFloat("Vertical", direction.y);
     }
 
-    public void ChangeSprites(SpriteLibraryAsset newSprites)
+    /*This is very improvised since my old system with Sprite Library 
+     * wasn't working after changing the version. */
+    public void ChangeSprites(Transform prefab)
     {
-        spriteLibrary.spriteLibraryAsset = newSprites;
+        Instantiate(prefab, transform.position, Quaternion.identity, GetComponentInParent<PlayerController>().transform);
+        Destroy(gameObject);
     }
 }

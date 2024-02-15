@@ -25,6 +25,7 @@ public interface IInteractable
     private void CancelPressed(InputAction.CallbackContext context)
     {
         StopInteracting();
+        interactor = null;
     }
 
     public void StartInteracting();
