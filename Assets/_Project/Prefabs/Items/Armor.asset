@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: -972700627, guid: 74327fbf82af9d642be3e4b8a7f5e357, type: 3}
   isStackable: 0
-  price: 500
+  price: 150
   prefab: {fileID: 5004620889438535172, guid: 3f364b2481c905e499b22f6f1bcc82e7, type: 3}

@@ -171,4 +171,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a5b0ee067731e478dc50280d4a55c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armorSprites: {fileID: 1179563399224048393, guid: 92e7dc8549d7f8749be79eddca8b8334, type: 3}
+  armorPrefab: {fileID: 1179563399224048393, guid: 92e7dc8549d7f8749be79eddca8b8334, type: 3}

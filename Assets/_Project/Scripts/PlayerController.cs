@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     [SerializeField] private float moveSpeed;
 
     private IInteractable interactableObject;
+    [SerializeField] private GameObject interactHint;
 
     private void OnEnable()
     {
         InputManager.input.Player.Enable();
         InputManager.input.Player.Interact.performed += _ => Interact();
+        InputManager.input.Player.Cancel.performed += _ => GameManager.instance.PauseGame();
     }
     private void OnDisable()
     {
@@ -45,18 +48,16 @@ public class PlayerController : MonoBehaviour
     {
         if (other.TryGetComponent(out interactableObject))
         {
-            Debug.Log("Press E to interact");
+            interactHint.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        /* This might seem unneceseary since I'm setting it to null, but in case 
-         * the player leaves another trigger BUT stays within interactable object's
-         * trigger, the interactableObject stays intact */
         if (other.TryGetComponent(out interactableObject))
         {
             interactableObject = null;
+            interactHint.SetActive(false);
         }
     }
 }
